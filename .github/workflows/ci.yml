@@ -1,0 +1,55 @@
+name: CI-CD-Quality-and-Training-Pipeline
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  validate-and-train:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python Runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Pinned Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint and Code Formatting Check (Ruff)
+        run: |
+          ruff check src tests scripts
+
+      - name: Data Ingestion & Preprocessing
+        run: |
+          python scripts/prepare_data.py
+
+      - name: Automated Model Training & MLflow Tracking
+        run: |
+          python -m src.heart_risk.train --experiment-name ci-pipeline-run
+
+      - name: Execute Automated Unit Tests (Pytest)
+        run: |
+          python -m pytest -v --junitxml=reports/junit.xml
+
+      - name: Generate Exploratory Data Analysis Figures
+        run: |
+          python scripts/run_eda.py
+
+      - name: Upload Build, Model & Test Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: heart-risk-ci-artifacts
+          path: |
+            artifacts/
+            reports/figures/
+            reports/junit.xml
+            data/processed/

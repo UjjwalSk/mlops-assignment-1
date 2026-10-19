@@ -1,0 +1,10 @@
+.venv/
+.deps/
+tmp/
+__pycache__/
+*.py[cod]
+data/raw/
+mlruns/
+*.log
+.pytest_cache/
+.ruff_cache/

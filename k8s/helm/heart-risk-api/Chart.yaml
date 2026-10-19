@@ -1,0 +1,13 @@
+apiVersion: v2
+name: heart-risk-api
+description: A production Helm chart for deploying the Heart Disease Risk Prediction API on Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - mlops
+  - fastapi
+  - heart-disease
+  - machine-learning
+maintainers:
+  - name: AIMLCZG523-Student

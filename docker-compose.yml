@@ -1,0 +1,56 @@
+services:
+  heart-risk-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: heart-risk-api:latest
+    container_name: heart-risk-api
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - mlops-network
+
+  prometheus:
+    image: prom/prometheus:v3.15.0
+    container_name: heart-risk-prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.enable-lifecycle"
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+    depends_on:
+      - heart-risk-api
+    networks:
+      - mlops-network
+
+  grafana:
+    image: grafana/grafana:13.2.3
+    container_name: heart-risk-grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./monitoring/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+    networks:
+      - mlops-network
+
+networks:
+  mlops-network:
+    driver: bridge
