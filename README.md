@@ -1,21 +1,17 @@
 # Heart Disease Risk Prediction — End-to-End MLOps Solution
-**BITS Pilani — Work Integrated Learning Programmes (WILP)**  
+**BITS Pilani — Work Integrated Learning Programmes (WILP)**
 **Machine Learning Operations (MLOps) AIMLCZG523 — Assignment 01**
 
 ![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11-blue.svg)
 
-**Student ID:** 2025AE05260  
+**Student ID:** 2025AE05260
 **BITS Email:** 2025ae05260@wilp.bits-pilani.ac.in
 
 A reproducible MLOps assignment implementation for binary coronary heart-disease risk prediction using the UCI Cleveland dataset. It includes data ingestion, EDA, feature engineering, two tuned classification models, MLflow tracking, automated tests, Docker packaging, cloud-ready Kubernetes manifests, and Prometheus/Grafana monitoring configuration.
 
-For the complete explanation, commands, expected outputs, and screenshot checklist, read [submission_guidance/README.md](submission_guidance/README.md).
-
 ---
 
 ## Architecture Overview
-
-![System Architecture](reports/figures/system_architecture.png)
 
 The decoupled architecture consists of five core layers:
 1. **Data Ingestion & Preprocessing:** Automated data acquisition, missing value (`?`) handling, and binary target formulation.
@@ -131,15 +127,10 @@ helm install heart-risk-api k8s/helm/heart-risk-api
 │   ├── service.yaml               # LoadBalancer Service
 │   ├── ingress.yaml               # Ingress routing manifest
 │   ├── hpa.yaml                   # Horizontal Pod Autoscaler manifest
-│   ├── README.md                  # Deployment verification guide
 │   └── helm/heart-risk-api/       # Parameterized Helm Chart
 ├── monitoring/                    # Observability configuration
 │   ├── prometheus.yml             # Prometheus scrape configuration
 │   └── grafana/                   # Grafana datasource and dashboard provisioning
-├── reports/                       # Formal reports & figures
-│   ├── figures/                   # EDA plots and System Architecture Diagram
-│   ├── Heart_Risk_MLOps_Assignment_Report.docx # Final Word report
-│   └── screenshots/               # Screenshot checklist & submission evidence
 ├── scripts/                       # Automation scripts
 │   ├── prepare_data.py            # Data extraction and validation with fallback
 │   ├── run_eda.py                 # Comprehensive EDA plot generator
@@ -156,7 +147,6 @@ helm install heart-risk-api k8s/helm/heart-risk-api
 ├── Dockerfile                     # Hardened non-root production Dockerfile
 ├── docker-compose.yml             # Full stack (FastAPI + Prometheus + Grafana)
 ├── requirements.txt               # Pinned pip requirements
-├── VIDEO_DEMO_GUIDE.md            # Video walkthrough script and outline
 └── Makefile                       # One-stop build and pipeline automation
 ```
 
@@ -204,7 +194,4 @@ helm install heart-risk-api k8s/helm/heart-risk-api
 - [x] GitHub Actions CI/CD workflow YAML (`.github/workflows/ci.yml`)
 - [x] Kubernetes manifests (Deployment, Service, Ingress, HPA) & Helm Chart
 - [x] Real-time monitoring stack (Prometheus + Grafana dashboard)
-- [x] Final Written Report: DOCX (`reports/Heart_Risk_MLOps_Assignment_Report.docx`)
-- [ ] Create the required video recording using `VIDEO_DEMO_GUIDE.md`
-- [ ] Create a GitHub repository, replace its URL here and in the final report, and capture a successful CI run
-- [ ] Run Docker and Kubernetes deployment locally or in cloud, then add original screenshots to `reports/screenshots/`
+- [x] GitHub repository and CI/CD workflow configuration
