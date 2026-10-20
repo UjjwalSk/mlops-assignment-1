@@ -1,10 +1,11 @@
 # Heart Disease Risk Prediction — End-to-End MLOps Solution
 **BITS Pilani — Work Integrated Learning Programmes (WILP)**
-**Machine Learning Operations (MLOps) AIMLCZG523 — Assignment 01**
+**Machine Learning Operations (MLOps) AIMLZG523 — Assignment 01**
 
 ![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11-blue.svg)
 
-**Student ID:** 2025AE05260
+**Name:** Ujjwal
+**Student ID:** 2025ae05260
 **BITS Email:** 2025ae05260@wilp.bits-pilani.ac.in
 
 A reproducible MLOps assignment implementation for binary coronary heart-disease risk prediction using the UCI Cleveland dataset. It includes data ingestion, EDA, feature engineering, two tuned classification models, MLflow tracking, automated tests, Docker packaging, cloud-ready Kubernetes manifests, and Prometheus/Grafana monitoring configuration.
