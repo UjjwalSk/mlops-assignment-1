@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: heart-risk-api
+  namespace: heart-risk
   labels: {app: heart-risk-api}
 spec:
   replicas: 2

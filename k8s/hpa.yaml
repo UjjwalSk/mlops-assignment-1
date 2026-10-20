@@ -2,6 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: heart-risk-api-hpa
+  namespace: heart-risk
   labels:
     app: heart-risk-api
 spec:
